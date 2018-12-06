@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>燃烧意志-攻略网</title>
+    <link rel="stylesheet" href="/static/bs/css/bootstrap.css">
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/bs/js/bootstrap.min.js"></script>
+
+    <style>
+        .index_png{
+            height: 40px;
+            margin-top: -9px;
+        }
+        .nav_style{
+            margin-bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+{# 导航 #}
+<nav class="navbar navbar-inverse navbar-static-top nav_style">
+    <div class="container-fluid png_style">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/#"><img alt="Brand" class='index_png' src="/static/img/ico.png"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">模拟器<span class="sr-only">(current)</span></a></li>
+                <li><a href="/strategy">攻略</a></li>
+                <li><a href="#">讨论/投票</a></li>
+                <li><a href="/about_me/">关于作者</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    {# 加上一个用户头像图标#}
+                    <li><a href="#"><span id="user_icon"
+                                          class="glyphicon glyphicon-user"></span>{{ request.user.username }}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">功能 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">修改密码</a></li>
+                            <li><a href="#">修改头像</a></li>
+                            <li><a href="/logout/">注销</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="/login/">登陆</a></li>
+                    <li><a href="/register/">注册</a></li>
+                {% endif %}
+
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+{#锚点：定义 一个地方，来放每每个页面不同的地方#}
+{% block page-main %}
+<!--在其他地方调用，添加的代码会放到这里-->
+{% endblock %}
+
+
+
+</body>
+</html>
