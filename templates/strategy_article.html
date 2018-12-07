@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block page-main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="page-header">
+                    <h1 class="text-center">{{ obj.title }}</h1>
+                    <h5 class="text-right">阅读:{{ obj.read_count }}</h5>
+                    <h5 class="text-right">{{ obj.create_time|date:'Y-m-d' }}</h5>
+                </div>
+                <div>
+                    {{ obj.content|safe }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
