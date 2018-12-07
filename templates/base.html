@@ -4,24 +4,15 @@
     <meta charset="UTF-8">
     <title>燃烧意志-攻略网</title>
     <link rel="stylesheet" href="/static/bs/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/css.css">
     <script src="/static/js/jquery-3.3.1.min.js"></script>
     <script src="/static/bs/js/bootstrap.min.js"></script>
 
-    <style>
-        .index_png{
-            height: 40px;
-            margin-top: -9px;
-        }
-        .nav_style{
-            margin-bottom: 0;
-        }
-
-    </style>
 </head>
 <body>
 
 {# 导航 #}
-<nav class="navbar navbar-inverse navbar-static-top nav_style">
+<nav class="navbar navbar-inverse navbar-fixed-top nav_style">
     <div class="container-fluid png_style">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -71,12 +62,14 @@
 </nav>
 
 
+<div style="margin-top: 50px">
+    {#锚点：定义 一个地方，来放每每个页面不同的地方#}
+    {% block page-main %}
+    <!--在其他地方调用，添加的代码会放到这里-->
+    {% endblock %}
+</div>
 
 
-{#锚点：定义 一个地方，来放每每个页面不同的地方#}
-{% block page-main %}
-<!--在其他地方调用，添加的代码会放到这里-->
-{% endblock %}
 
 
 

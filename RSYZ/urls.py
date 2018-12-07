@@ -16,12 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
+# media配置 打开该路径浏览器访问权限
+from django.views.static import serve
+
+from RSYZ import settings
 from apps.blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('^$', views.index),
-    path('about_me/', views.about_me),
-    path('strategy/', views.strategy),
+    re_path('^$', views.index),  # 首页
+    path('about_me/', views.about_me),  # 作者页
+
+
+    # media配置
+    re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+
+    # 攻略区
+    path('strategy/', views.strategy),  # 攻略首页
+    re_path('strategy/(?P<name>\w+)$', views.strategy_list),  # 对应攻略列表
+
 
 ]

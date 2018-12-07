@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # create new app
-    'apps.blog.apps.BlogConfig',
+    'apps.blog'
+    # 'apps.blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -104,7 +105,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'en-us'
+# admin后台改为中文
+# 如果摇摆表单名改完自定义中文，在model下的init中设置默认配置
+LANGUAGE_CODE = 'zh-Hans'
+
 
 # 时区设置到上海
 TIME_ZONE = 'Asia/Shanghai'
@@ -116,13 +120,11 @@ USE_L10N = True
 USE_TZ = False  # 时间过滤 month 不好用时候，改为False   （Mysql才会出现）
 
 
-# ==========自定义配置==========
-
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')  # 把新增加的添加到内置的STATICFILES_DIRS内
+    os.path.join(BASE_DIR, 'static'),  # 把新增加的添加到内置的STATICFILES_DIRS内
+
 ]
 
 # 因为自定义了 UserInfo表，所以django要设置默认表位置
@@ -130,6 +132,7 @@ STATICFILES_DIRS = [
 
 
 # 配置用户上传静态文件 media
+# 还需要在url.py中进行配置才生效
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # 做别名
 MEDIA_URL = '/media/'
