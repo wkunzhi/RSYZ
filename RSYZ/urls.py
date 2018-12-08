@@ -33,7 +33,7 @@ urlpatterns = [
 
     # 攻略区
     path('strategy/', views.strategy),  # 攻略首页
-    re_path('strategy/(?P<obj_id>\d+)/(?P<page_num>\d+)$', views.strategy_list),  # 对应攻略列表
-    # re_path('strategy/(?P<obj_id>\w+)/(?P<article_id>\d+)$', views.strategy_article),  # 文章详情页面
+    re_path('strategy/(?P<obj_id>\d+)/list/(?P<page_num>\w+)$', views.strategy_list),  # 对应攻略列表
+    re_path('strategy/article(?P<article_id>\d+)$', views.strategy_article),  # 文章详情页面
 
 ]

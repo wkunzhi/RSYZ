@@ -136,3 +136,12 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # 做别名
 MEDIA_URL = '/media/'
+
+
+# ================自定义配置区================
+
+# 攻略列表每页展示条数
+STRATEGY_LIST_NUM = 8
+# 同IP每隔X秒时间，计一次文章阅读量
+TIME_BETWEEN = 30
+

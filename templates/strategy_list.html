@@ -5,7 +5,7 @@
     <div class="container">
 
         <!--抬头 广告-->
-        <div class="row"  style="margin-top: 10px;">
+        <div class="row" style="margin-top: 10px;">
             <div class="col-md-6">
                 <div class="jumbotron">
                     <h1>模拟器加技能</h1>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="jumbotron" >
+                <div class="jumbotron">
                     <h1>版本数据统计</h1>
                     <p>数据对比分析</p>
                     <p><a class="btn btn-success btn-lg btn-block" href="#" role="button">点击查看</a></p>
@@ -32,48 +32,67 @@
                 </div>
                 <div class="span_label_style" style="padding-bottom: 20px;">
                     {% for tag in tag_list %}
-                        <span class="label label-{{ tag.color }}" >{{ tag.title }}</span>
+                        <span class="label label-{{ tag.color }}">{{ tag.title }}</span>
                     {% endfor %}
                 </div>
                 <div class="list-group">
-                    <!--信息详情-->
-                    {% for obj in obj_list %}
-                        <a href="{{ obj_id }}/{{ obj.id }}" class="list-group-item">
+                    <!--分页的信息详情-->
+                    {% for obj in page_obj %}
+                        <a href="/strategy/article{{ obj.id }}" class="list-group-item">
                             <!--限制长度否则过长样式崩溃15字符可以承载2个标签4位-->
-                            {{ obj.title|truncatechars_html:15}}
+                            {{ obj.title|truncatechars_html:15 }}
                             {% for tag in obj.tag.all %}
-                                <span class="label label-{{ tag.color }} pull-right" style="margin-left: 5px">{{ tag }}</span>
+                                <span class="label label-{{ tag.color }} pull-right"
+                                      style="margin-left: 5px">{{ tag }}</span>
                             {% endfor %}
                         </a>
                     {% endfor %}
+
                 </div>
 
             </div>
         </div>
 
+
         <!--分页-->
 
-    <nav aria-label="Page navigation">
-      <ul class="pagination pagination-lg pull-right">
-        <li>
-          <a href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-          <li><a href="#">6</a></li>
-        <li>
-          <a href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+        <nav aria-label="Page navigation">
+            <ul class="pagination pagination-lg pull-right">
 
+                <!--上页：如果有上页，则显示并设置链接-->
+                {% if page_obj.has_previous %}
+                    <li>
+                        <a href="{{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                {% endif %}
+
+                <!--页码-->
+                {% for page in page_range %}
+                    <!--当前选中页面active-->
+                    {% if page_obj.number == page %}
+                        <li class="active"><a href="{{ page }}">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="{{ page }}">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+
+                <!--下页：如果有下页，则显示并设置链接-->
+                {% if page_obj.has_next %}
+                    <li>
+                        <a href="{{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </nav>
 
     </div>
 {% endblock %}
